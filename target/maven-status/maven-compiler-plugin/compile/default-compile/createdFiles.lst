@@ -1,0 +1,8 @@
+com\geocapture\dto\CaptureRequest.class
+com\geocapture\repository\UserDataRepository.class
+com\geocapture\config\WebConfig.class
+com\geocapture\service\GeocodingService.class
+com\geocapture\GeoApplication.class
+com\geocapture\service\UserDataService.class
+com\geocapture\model\UserData.class
+com\geocapture\controller\CaptureController.class

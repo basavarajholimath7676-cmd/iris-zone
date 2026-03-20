@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GeoCapture — capture your real-time GPS location and a photo, then store them securely.">
+    <title>GeoCapture — Location & Photo Capture</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Animated background orbs -->
+    <div class="bg-orb bg-orb--1"></div>
+    <div class="bg-orb bg-orb--2"></div>
+    <div class="bg-orb bg-orb--3"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header" id="header">
+            <div class="header__icon">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="url(#grad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <defs><linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#6c63ff"/><stop offset="100%" style="stop-color:#00d4ff"/></linearGradient></defs>
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                    <circle cx="12" cy="10" r="3"/>
+                </svg>
+            </div>
+            <h1 class="header__title">GeoCapture</h1>
+            <p class="header__subtitle">Capture location & photo evidence in real time</p>
+        </header>
+
+        <!-- Step 1: Location Capture -->
+        <section class="card card--step" id="step-location">
+            <div class="card__badge">1</div>
+            <h2 class="card__title">📍 Capture Location</h2>
+            <p class="card__desc">Tap the button below to capture your current GPS coordinates and resolve them to a street address.</p>
+
+            <button class="btn btn--primary" id="btn-location">
+                <span class="btn__icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+                </span>
+                <span class="btn__text">Get My Location</span>
+            </button>
+
+            <div class="location-result" id="location-result" style="display:none;">
+                <div class="location-result__row">
+                    <span class="location-result__label">Latitude</span>
+                    <span class="location-result__value" id="lat-value">—</span>
+                </div>
+                <div class="location-result__row">
+                    <span class="location-result__label">Longitude</span>
+                    <span class="location-result__value" id="lng-value">—</span>
+                </div>
+                <div class="location-result__row location-result__row--address">
+                    <span class="location-result__label">Address</span>
+                    <span class="location-result__value" id="address-value">Resolving…</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Step 2: Photo Capture -->
+        <section class="card card--step" id="step-photo">
+            <div class="card__badge">2</div>
+            <h2 class="card__title">📸 Capture Photo</h2>
+            <p class="card__desc">Open your camera, frame your shot, and take a snapshot as photographic evidence.</p>
+
+            <button class="btn btn--primary" id="btn-camera">
+                <span class="btn__icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                </span>
+                <span class="btn__text">Open Camera</span>
+            </button>
+
+            <div class="camera-area" id="camera-area" style="display:none;">
+                <video id="video-preview" autoplay playsinline></video>
+                <button class="btn btn--capture" id="btn-snapshot">
+                    <span class="capture-ring"></span>
+                </button>
+            </div>
+
+            <div class="photo-preview" id="photo-preview" style="display:none;">
+                <img id="photo-thumb" alt="Captured photo">
+                <button class="btn btn--outline btn--sm" id="btn-retake">Retake</button>
+            </div>
+            <canvas id="snapshot-canvas" style="display:none;"></canvas>
+        </section>
+
+        <!-- Step 3: Submit -->
+        <section class="card card--step" id="step-submit">
+            <div class="card__badge">3</div>
+            <h2 class="card__title">🚀 Submit Data</h2>
+            <p class="card__desc">Once both location and photo are captured, submit your data for secure storage.</p>
+
+            <div class="submit-status" id="submit-status">
+                <div class="status-dot" id="status-location"></div>
+                <span id="status-location-text">Location not captured</span>
+            </div>
+            <div class="submit-status">
+                <div class="status-dot" id="status-photo"></div>
+                <span id="status-photo-text">Photo not captured</span>
+            </div>
+
+            <button class="btn btn--submit" id="btn-submit" disabled>
+                <span class="btn__text">Submit Capture</span>
+                <span class="btn__loader" id="submit-loader" style="display:none;"></span>
+            </button>
+        </section>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <span class="toast__icon" id="toast-icon"></span>
+        <span class="toast__msg" id="toast-msg"></span>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
